@@ -46,9 +46,6 @@ def dvf_commune():
     df = pd.read_csv("75.csv")
     df.code_commune = df.code_commune.astype(int)
     df_dict = df[df.code_commune == eval(request.args.get("code_commune"))].to_dict()
-    # import json
-    # with open("75114.json",'w') as outfile:
-    #     json.dump(df_dict, outfile,indent=4)
     return jsonify(df_dict)
 
 @app.route('/dvf2')
@@ -64,6 +61,13 @@ def dvf2():
 @app.route('/dvf3')
 def dvf3():
     return request.args.get("code")
+
+@app.route('/dvf4')
+def dvf4():
+    import json
+    with open("75114.json",'w') as outfile:
+        json.dump(df_dict, outfile,indent=4)
+    return jsonify(df_dict)
 
 # We only need this for local development
 if __name__ == '__main__':
